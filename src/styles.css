@@ -177,3 +177,34 @@
 @utility section-pad {
   padding-block: 5rem;
 }
+
+/* ===== Admin CMS Design System ===== */
+:root {
+  --admin-sidebar: oklch(0.21 0.03 255);
+  --admin-sidebar-foreground: oklch(0.85 0.01 250);
+  --admin-sidebar-muted: oklch(0.55 0.02 255);
+  --admin-sidebar-hover: oklch(0.26 0.03 255);
+  --admin-sidebar-active: oklch(0.30 0.04 255);
+  --admin-sidebar-border: oklch(0.30 0.02 255);
+  --admin-accent: oklch(0.52 0.20 255);
+  --admin-accent-foreground: oklch(0.99 0.005 250);
+  --admin-accent-light: oklch(0.52 0.20 255 / 0.10);
+  --admin-border: oklch(0.91 0.005 250);
+  --admin-surface: oklch(0.96 0.005 250);
+  --admin-workspace: oklch(0.97 0.005 250);
+}
+
+@theme inline {
+  --color-admin-sidebar: var(--admin-sidebar);
+  --color-admin-sidebar-foreground: var(--admin-sidebar-foreground);
+  --color-admin-sidebar-muted: var(--admin-sidebar-muted);
+  --color-admin-sidebar-hover: var(--admin-sidebar-hover);
+  --color-admin-sidebar-active: var(--admin-sidebar-active);
+  --color-admin-sidebar-border: var(--admin-sidebar-border);
+  --color-admin-accent: var(--admin-accent);
+  --color-admin-accent-foreground: var(--admin-accent-foreground);
+  --color-admin-accent-light: var(--admin-accent-light);
+  --color-admin-border: var(--admin-border);
+  --color-admin-surface: var(--admin-surface);
+  --color-admin-workspace: var(--admin-workspace);
+}
