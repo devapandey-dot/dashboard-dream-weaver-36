@@ -17,7 +17,6 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminLayoutRouteImport } from './routes/admin/_layout'
 import { Route as AdminBlogsRouteImport } from './routes/admin/blogs'
 import { Route as AdminFaqRouteImport } from './routes/admin/faq'
 import { Route as AdminLeadsRouteImport } from './routes/admin/leads'
@@ -75,11 +74,6 @@ const PricingRoute = PricingRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminLayoutRoute = AdminLayoutRouteImport.update({
-  id: '/admin/_layout',
-  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminBlogsRoute = AdminBlogsRouteImport.update({
@@ -181,7 +175,6 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
-  '/admin': typeof AdminLayoutRoute
   '/admin/blogs': typeof AdminBlogsRoute
   '/admin/faq': typeof AdminFaqRoute
   '/admin/leads': typeof AdminLeadsRoute
@@ -210,7 +203,6 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
-  '/admin': typeof AdminIndexRoute
   '/admin/blogs': typeof AdminBlogsRoute
   '/admin/faq': typeof AdminFaqRoute
   '/admin/leads': typeof AdminLeadsRoute
@@ -225,6 +217,7 @@ export interface FileRoutesByTo {
   '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/users': typeof AdminUsersRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/services': typeof ServicesIndexRoute
   '/admin/pages/$id': typeof AdminPagesIdRoute
   '/admin/pages/new': typeof AdminPagesNewRoute
@@ -239,7 +232,6 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/portfolio': typeof PortfolioRoute
   '/pricing': typeof PricingRoute
-  '/admin/_layout': typeof AdminLayoutRoute
   '/admin/blogs': typeof AdminBlogsRoute
   '/admin/faq': typeof AdminFaqRoute
   '/admin/leads': typeof AdminLeadsRoute
@@ -270,7 +262,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portfolio'
     | '/pricing'
-    | '/admin'
     | '/admin/blogs'
     | '/admin/faq'
     | '/admin/leads'
@@ -299,7 +290,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portfolio'
     | '/pricing'
-    | '/admin'
     | '/admin/blogs'
     | '/admin/faq'
     | '/admin/leads'
@@ -314,6 +304,7 @@ export interface FileRouteTypes {
     | '/admin/testimonials'
     | '/admin/users'
     | '/services/$slug'
+    | '/admin'
     | '/services'
     | '/admin/pages/$id'
     | '/admin/pages/new'
@@ -327,7 +318,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portfolio'
     | '/pricing'
-    | '/admin/_layout'
     | '/admin/blogs'
     | '/admin/faq'
     | '/admin/leads'
@@ -357,7 +347,6 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   PortfolioRoute: typeof PortfolioRoute
   PricingRoute: typeof PricingRoute
-  AdminLayoutRoute: typeof AdminLayoutRoute
   AdminBlogsRoute: typeof AdminBlogsRoute
   AdminFaqRoute: typeof AdminFaqRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
@@ -435,13 +424,6 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/_layout': {
-      id: '/admin/_layout'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/blogs': {
@@ -581,7 +563,6 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   PortfolioRoute: PortfolioRoute,
   PricingRoute: PricingRoute,
-  AdminLayoutRoute: AdminLayoutRoute,
   AdminBlogsRoute: AdminBlogsRoute,
   AdminFaqRoute: AdminFaqRoute,
   AdminLeadsRoute: AdminLeadsRoute,
