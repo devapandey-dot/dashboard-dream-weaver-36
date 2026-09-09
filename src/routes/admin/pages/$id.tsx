@@ -5,7 +5,16 @@ import {
   Monitor, Tablet, Smartphone, ArrowLeft, History, Activity as ActivityIcon,
   ExternalLink, Search as SearchIcon,
 } from "lucide-react";
-import { cmsPagesFull, sectionLibrary, seoChecklist, activityLog, versions, type SectionType } from "@/data/cms";
+import {
+  cmsPagesFull,
+  sectionLibrary,
+  seoChecklist,
+  activityLog,
+  versions,
+  type CmsPage,
+  type PageSection,
+  type SectionType,
+} from "@/data/cms";
 import { services, projects, testimonials, faqs } from "@/data/site";
 import { AdminCard, CardHead, Btn, Field, Input, Textarea, Select, ScoreRing } from "@/components/admin/AdminUI";
 
@@ -16,9 +25,20 @@ export const Route = createFileRoute("/admin/pages/$id")({
 
 type TabType = "content" | "sections" | "seo" | "preview" | "activity";
 
+const fallbackPage: CmsPage = {
+  id: "home",
+  title: "Home",
+  slug: "/",
+  type: "System Page",
+  status: "Published",
+  seoScore: 94,
+  updated: "2 min ago",
+  sections: [],
+};
+
 function PageEditorPage() {
   const { id } = Route.useParams();
-  const page = cmsPagesFull.find((p) => p.id === id) ?? cmsPagesFull[0];
+  const page = cmsPagesFull.find((item) => item.id === id) ?? cmsPagesFull[0] ?? fallbackPage;
 
   const [tab, setTab] = useState<TabType>("content");
   const [sections, setSections] = useState(page.sections);
@@ -31,19 +51,28 @@ function PageEditorPage() {
     const newIdx = idx + dir;
     if (newIdx < 0 || newIdx >= sections.length) return;
     const updated = [...sections];
-    [updated[idx], updated[newIdx]] = [updated[newIdx], updated[idx]];
+    const current = updated[idx];
+    const target = updated[newIdx];
+    if (!current || !target) return;
+    updated[idx] = target;
+    updated[newIdx] = current;
     setSections(updated);
   };
 
   const toggleVisible = (idx: number) => {
     const updated = [...sections];
-    updated[idx] = { ...updated[idx], visible: !updated[idx].visible };
+    const section = updated[idx];
+    if (!section) return;
+    updated[idx] = { ...section, visible: !section.visible };
     setSections(updated);
   };
 
   const duplicateSection = (idx: number) => {
     const updated = [...sections];
-    updated.splice(idx + 1, 0, { ...updated[idx], id: `s${Date.now()}` });
+    const section = updated[idx];
+    if (!section) return;
+    const copy: PageSection = { ...section, id: `s${Date.now()}` };
+    updated.splice(idx + 1, 0, copy);
     setSections(updated);
   };
 
